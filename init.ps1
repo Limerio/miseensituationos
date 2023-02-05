@@ -4,7 +4,7 @@ Import-Module ActiveDirectory
 # Creation des Unités d'organisations
 #
 
-$ADOrganizationUnit = Import-Csv ./ou.csv -Delimiter ";"
+$ADOrganizationUnit = Import-Csv ./data/ou.csv -Delimiter ";"
 
 foreach ($OU in $ADOrganizationUnit) {
    $Name = $OU.name
@@ -23,7 +23,7 @@ foreach ($OU in $ADOrganizationUnit) {
 # Création des ordindateurs
 #
 
-$ADComputer = Import-Csv .\computers.csv -Delimiter ";"
+$ADComputer = Import-Csv ./data/computers.csv -Delimiter ";"
 
 foreach ($Computer in $ADComputer) {
    $Name = $Computer.name
@@ -43,7 +43,7 @@ foreach ($Computer in $ADComputer) {
 # Création des groupes
 #
 
-$ADGroup = Import-Csv .\groups.csv -Delimiter ";"
+$ADGroup = Import-Csv ./data/groups.csv -Delimiter ";"
 
 foreach ($Group in $ADGroup) {
    $Name = $Group.name
@@ -64,7 +64,7 @@ foreach ($Group in $ADGroup) {
 #
 
 
-$ADUsers = Import-Csv ./users.csv -Delimiter ";"
+$ADUsers = Import-Csv ./data/users.csv -Delimiter ";"
 $UPN = "marvelle.local"
 
 foreach ($User in $ADUsers) {
