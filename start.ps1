@@ -1,7 +1,6 @@
-New-NetIPAddress -InterfaceIndex 3 -IPAddress 192.168.0.1 -PrefixLength 24
-Install-WindowsFeature DNS
-Install-WindowsFeature DHCP
-Add-WindowsFeature AD-Domain-Services
+$ip = Get-NetIpAddress -InterfaceAlias "Ethernet" -AddressFamily IPv4
+New-NetIPAddress -InterfaceIndex $ip.InterfaceIndex -IPAddress 192.168.0.1 -PrefixLength 24
+Add-WindowsFeature AD-Domain-Services -IncludeManagementTools
 
 Import-Module ADDSDeployment
 
@@ -17,4 +16,3 @@ Install-ADDSForest `
 -NoRebootOnCompletion:$false `
 -SysvolPath "C:\Windows\SYSVOL" `
 -Force:$true
-
