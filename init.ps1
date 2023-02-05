@@ -96,3 +96,15 @@ foreach ($User in $ADUsers) {
 #
 # Fin de création des utilisateurs et attribution des groupes
 #
+
+#
+# Installation web server
+#
+
+Install-WindowsFeature Web-Server -IncludeManagementTools
+
+#
+# Suppression de la tâche
+#
+
+Unregister-ScheduledTask -TaskName "Init server"
