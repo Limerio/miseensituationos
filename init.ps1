@@ -4,16 +4,17 @@
 
 $Error.Clear()
 try {
-  Add-DhcpServerv4Scope -Name "Marvelle" -StartRange 192.168.0.1 -EndRange 192.168.0.150 -SubnetMask 255.255.255.0
-} catch {
-  Write-Warning "Il y a déjà une étendu"
+	Add-DhcpServerv4Scope -Name "Marvelle" -StartRange 192.168.0.1 -EndRange 192.168.0.150 -SubnetMask 255.255.255.0
+}
+catch {
+	Write-Warning "Il y a déjà une étendu"
 }
 
-if(!$Error){
-  Add-DhcpServerv4ExclusionRange -ScopeId 192.168.0.0 -StartRange 192.168.0.1 -EndRange 192.168.0.10
-  Set-DhcpServerv4OptionValue -ScopeId 192.168.0.0 -DnsServer 192.168.0.1 -DnsDomain "marvelle.local" -Router 192.168.0.254 
-  Set-DhcpServerv4Scope -ScopeId 192.168.0.0 -Name "projet" -State Active
-  Write-Host "Le réseau étendu a été créer" -ForegroundColor Green
+if (!$Error) {
+	Add-DhcpServerv4ExclusionRange -ScopeId 192.168.0.0 -StartRange 192.168.0.1 -EndRange 192.168.0.10
+	Set-DhcpServerv4OptionValue -ScopeId 192.168.0.0 -DnsServer 192.168.0.1 -DnsDomain "marvelle.local" -Router 192.168.0.254 
+	Set-DhcpServerv4Scope -ScopeId 192.168.0.0 -Name "projet" -State Active
+	Write-Host "Le réseau étendu a été créer" -ForegroundColor Green
 }
 
 #
@@ -26,13 +27,14 @@ Import-Module ActiveDirectory
 # Creation des UnitÃ©s d'organisations
 #
 
-$ADOrganizationUnit = Import-Csv %USERPROFILE%/Desktop/data/ou.csv -Delimiter ";"
+$ADOrganizationUnit = Import-Csv $env:USERPROFILE/Desktop/data/ou.csv -Delimiter ";"
 
 foreach ($OU in $ADOrganizationUnit) {
 	$Name = $OU.name
-	if(Get-ADOrganizationalUnit -Filter { Name -eq $Name }) {
+	if (Get-ADOrganizationalUnit -Filter { Name -eq $Name }) {
 		Write-Warning "A OU with name $Name already exists in Active Directory."
-	} else {
+	}
+ else {
 		New-ADOrganizationalUnit -Name $Name -Path "DC=marvelle,DC=local"
 	}
 }
@@ -45,13 +47,14 @@ foreach ($OU in $ADOrganizationUnit) {
 # CrÃ©ation des ordindateurs
 #
 
-$ADComputer = Import-Csv %USERPROFILE%/Desktop/data/computers.csv -Delimiter ";"
+$ADComputer = Import-Csv $env:USERPROFILE/Desktop/data/computers.csv -Delimiter ";"
 
 foreach ($Computer in $ADComputer) {
 	$Name = $Computer.name
-	if(Get-ADComputer -Filter { Name -eq $Name }) {
+	if (Get-ADComputer -Filter { Name -eq $Name }) {
 		Write-Warning "A group with name $Name already exists in Active Directory."
-	} else {
+	}
+ else {
 		New-ADComputer -Name $Name -Path "OU=Ordinateurs,DC=marvelle,DC=local"
 		Write-Host "Computer $Name is added"
 	}
@@ -65,13 +68,14 @@ foreach ($Computer in $ADComputer) {
 # CrÃ©ation des groupes
 #
 
-$ADGroup = Import-Csv %USERPROFILE%/Desktop/data/groups.csv -Delimiter ";"
+$ADGroup = Import-Csv $env:USERPROFILE/Desktop/data/groups.csv -Delimiter ";"
 
 foreach ($Group in $ADGroup) {
 	$Name = $Group.name
-	if(Get-ADGroup -Filter { Name -eq $Name }) {
+	if (Get-ADGroup -Filter { Name -eq $Name }) {
 		Write-Warning "A group with name $Name already exists in Active Directory."
-	} else {
+	}
+ else {
 		New-ADGroup -Name $Name -SamAccountName $Name -GroupScope Global -GroupCategory Security -Path "OU=Groupes,DC=marvelle,DC=local"
 		Write-Host "Group $Name is created"
 	}
@@ -86,14 +90,15 @@ foreach ($Group in $ADGroup) {
 #
 
 
-$ADUsers = Import-Csv %USERPROFILE%/Desktop/data/users.csv -Delimiter ";"
+$ADUsers = Import-Csv $env:USERPROFILE/Desktop/data/users.csv -Delimiter ";"
 $UPN = "marvelle.local"
 
 foreach ($User in $ADUsers) {
-	$username = $User.Prenom+'.'+$User.nom
+	$username = $User.Prenom + '.' + $User.nom
 	if (Get-ADUser -F { SamAccountName -eq $username }) {
 		Write-Warning "A user account with username $username already exists in Active Directory."
-	} else {
+	}
+ else {
 		$firstname = $User.Prenom    
 		$lastname = $User.Nom
 		$email = $User.email
@@ -104,6 +109,7 @@ foreach ($User in $ADUsers) {
 			-Name "$firstname $lastname" `
 			-GivenName $firstname `
 			-Surname $lastname `
+			-EmailAddress $email `
 			-Enabled $True `
 			-DisplayName "$lastname, $firstname" `
 			-Path 'OU=Utilisateurs,DC=marvelle,DC=local' `
@@ -144,16 +150,17 @@ Install-WindowsFeature Print-Internet -IncludeManagementTools
 # CrÃ©ation des imprimantes
 #
 
-$ADPrinters = Import-Csv %USERPROFILE%/Desktop/data/printers.csv -Delimiter ";"
+$ADPrinters = Import-Csv $env:USERPROFILE/Desktop/data/printers.csv -Delimiter ";"
 
 foreach ($Printer in $ADPrinters) {
-  $name = $Printer.name
-  if (Get-ADPrinter -F { Name -eq $name }) {
+	$name = $Printer.name
+	if (Get-ADPrinter -F { Name -eq $name }) {
 	 Write-Warning "A printer with name $name already exists in Active Directory."
-  } else {
+	}
+ else {
 	 $driver = $Printer.driver
 	 Add-Printer -Name $name -DriverName $driver
-  }
+	}
 }
 
 #
