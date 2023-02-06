@@ -1,5 +1,5 @@
 Import-Module ActiveDirectory
-  
+
 $ADUsers = Import-Csv ./users.csv -Delimiter ";"
 $UPN = "marvelle.local"
 
@@ -22,6 +22,7 @@ foreach ($User in $ADUsers) {
             -Path 'OU=please,DC=marvelle,DC=local' `
             -AccountPassword (ConvertTo-secureString  test@1234562  -AsPlainText -Force) -ChangePasswordAtLogon $True
 
+        Add-ADGroupMember -Identity $group -Members $username
         Write-Host "The user account $username is created." -ForegroundColor Cyan
     }
 }
