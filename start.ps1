@@ -46,7 +46,7 @@ Install-ADDSForest `
 # CrÃ©ation de la tÃ¢che aprÃ¨s redÃ©marrage
 #
 
-$action = New-ScheduledTaskAction -Execute "C:\Users\Administrateur.WIN-JVJI6HKCQAN\Desktop\init.ps1"
+$action = New-ScheduledTaskAction -Execute "powershell C:\Users\Administrateur.WIN-JVJI6HKCQAN\Desktop\init.ps1"
 $trigger = New-ScheduledTaskTrigger -AtLogon
 $principal = New-ScheduledTaskPrincipal -UserId "MARVELLE\Administrateur"
 $settings = New-ScheduledTaskSettingsSet
