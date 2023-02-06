@@ -104,7 +104,21 @@ foreach ($User in $ADUsers) {
 Install-WindowsFeature Web-Server -IncludeManagementTools
 
 #
-# Suppression de la tÃ¢che
+# Fin de l'installation du web server
+#
+
+#
+# Inistallation Print Services
+#
+
+Install-WindowsFeature Print-Services -IncludeManagementTools
+
+#
+# fin de l'installation du Print Server
+#
+
+#
+# Suppresion de la tâche
 #
 
 Unregister-ScheduledTask -TaskName "Init server"
