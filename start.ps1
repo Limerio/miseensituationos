@@ -1,12 +1,12 @@
 #
-# Définition de l'adresse ip sur l'interface Ethernet
+# DÃ©finition de l'adresse ip sur l'interface Ethernet
 #
 
 $ip = Get-NetIpAddress -InterfaceAlias "Ethernet" -AddressFamily IPv4
 New-NetIPAddress -InterfaceIndex $ip.InterfaceIndex -IPAddress 192.168.0.1 -PrefixLength 24
 
 #
-# Fin de la définition de l'adresse ip
+# Fin de la dÃ©finition de l'adresse ip
 #
 
 #
@@ -20,7 +20,7 @@ Add-WindowsFeature AD-Domain-Services -IncludeManagementTools
 #
 
 #
-# Déploiment de la forêt
+# DÃ©ploiment de la forÃªt
 #
 
 Import-Module ADDSDeployment
@@ -39,26 +39,26 @@ Install-ADDSForest `
 -Force:$true
 
 #
-# Fin du déploiement de la forêt
+# Fin du dÃ©ploiement de la forÃªt
 #
 
 #
-# Création de la tâche après redémarrage
+# CrÃ©ation de la tÃ¢che aprÃ¨s redÃ©marrage
 #
 
-$action = New-ScheduledTaskAction -Execute "./init.ps1"
+$action = New-ScheduledTaskAction -Execute "C:\Users\Administrateur.WIN-JVJI6HKCQAN\Desktop\init.ps1"
 $trigger = New-ScheduledTaskTrigger -AtLogon
-$principal = "MARVELLE\Administrator"
+$principal = New-ScheduledTaskPrincipal -UserId "MARVELLE\Administrateur"
 $settings = New-ScheduledTaskSettingsSet
 $task = New-ScheduledTask -Action $action -Principal $principal -Trigger $trigger -Settings $settings
-Register-ScheduledTask T1 -InputObject $task -TaskName "Init server"
+Register-ScheduledTask -InputObject $task -TaskName "Init server"
 
 #
-# Fin de la création de la tâche
+# Fin de la crÃ©ation de la tÃ¢che
 #
 
 #
-# Redémarrage de la machine
+# RedÃ©marrage de la machine
 #
 
 Restart-Computer
