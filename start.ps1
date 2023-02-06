@@ -14,6 +14,7 @@ New-NetIPAddress -InterfaceIndex $ip.InterfaceIndex -IPAddress 192.168.0.1 -Pref
 #
 
 Add-WindowsFeature AD-Domain-Services -IncludeManagementTools
+Rename-Computer -NewName "SPC01"
 
 #
 # Fin de l'ajout des services de domaines
@@ -46,7 +47,7 @@ Install-ADDSForest `
 # CrÃ©ation de la tÃ¢che aprÃ¨s redÃ©marrage
 #
 
-$action = New-ScheduledTaskAction -Execute "powershell C:\Users\Administrateur.WIN-JVJI6HKCQAN\Desktop\init.ps1"
+$action = New-ScheduledTaskAction -Execute "powershell" -Argument "-File %USERPROFILE%\\Desktop\\init.ps1"
 $trigger = New-ScheduledTaskTrigger -AtLogon
 $principal = New-ScheduledTaskPrincipal -UserId "MARVELLE\Administrateur"
 $settings = New-ScheduledTaskSettingsSet

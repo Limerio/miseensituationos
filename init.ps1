@@ -1,10 +1,10 @@
 Import-Module ActiveDirectory
 
 # 
-# Creation des Unités d'organisations
+# Creation des UnitÃ©s d'organisations
 #
 
-$ADOrganizationUnit = Import-Csv ./data/ou.csv -Delimiter ";"
+$ADOrganizationUnit = Import-Csv %USERPROFILE%/Desktop/data/ou.csv -Delimiter ";"
 
 foreach ($OU in $ADOrganizationUnit) {
    $Name = $OU.name
@@ -16,14 +16,14 @@ foreach ($OU in $ADOrganizationUnit) {
 }
 
 #
-# Fin de création des unités d'organisations
+# Fin de crÃ©ation des unitÃ©s d'organisations
 #
 
 #
-# Création des ordindateurs
+# CrÃ©ation des ordindateurs
 #
 
-$ADComputer = Import-Csv ./data/computers.csv -Delimiter ";"
+$ADComputer = Import-Csv %USERPROFILE%/Desktop/data/computers.csv -Delimiter ";"
 
 foreach ($Computer in $ADComputer) {
    $Name = $Computer.name
@@ -36,14 +36,14 @@ foreach ($Computer in $ADComputer) {
 }
 
 #
-# Fin de création des ordinateurs
+# Fin de crÃ©ation des ordinateurs
 #
 
 #
-# Création des groupes
+# CrÃ©ation des groupes
 #
 
-$ADGroup = Import-Csv ./data/groups.csv -Delimiter ";"
+$ADGroup = Import-Csv %USERPROFILE%/Desktop/data/groups.csv -Delimiter ";"
 
 foreach ($Group in $ADGroup) {
    $Name = $Group.name
@@ -56,15 +56,15 @@ foreach ($Group in $ADGroup) {
 }
 
 #
-# Fin de création des groupes
+# Fin de crÃ©ation des groupes
 #
 
 #
-# Création des utilisateurs et attribution des groupes
+# CrÃ©ation des utilisateurs et attribution des groupes
 #
 
 
-$ADUsers = Import-Csv ./data/users.csv -Delimiter ";"
+$ADUsers = Import-Csv %USERPROFILE%/Desktop/data/users.csv -Delimiter ";"
 $UPN = "marvelle.local"
 
 foreach ($User in $ADUsers) {
@@ -94,7 +94,7 @@ foreach ($User in $ADUsers) {
 
 
 #
-# Fin de création des utilisateurs et attribution des groupes
+# Fin de crÃ©ation des utilisateurs et attribution des groupes
 #
 
 #
@@ -104,7 +104,7 @@ foreach ($User in $ADUsers) {
 Install-WindowsFeature Web-Server -IncludeManagementTools
 
 #
-# Suppression de la tâche
+# Suppression de la tÃ¢che
 #
 
 Unregister-ScheduledTask -TaskName "Init server"
