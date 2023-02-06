@@ -1,4 +1,5 @@
-Import-Module ActiveDirectory
+Install-WindowsFeature Print-Services -IncludeManagementTools
+Install-WindowsFeature Print-Internet -IncludeManagementTools
 
 $ADPrinters = Import-Csv %USERPROFILE%/Desktop/data/printers.csv -Delimiter ";"
 
