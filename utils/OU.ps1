@@ -1,5 +1,5 @@
 Import-Module ActiveDirectory
-  
+
 $ADOrganizationUnit = Import-Csv ./ou.csv -Delimiter ";"
 
 foreach ($OU in $ADOrganizationUnit) {

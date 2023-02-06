@@ -1,5 +1,5 @@
 Import-Module ActiveDirectory
-  
+
 $ADGroup = Import-Csv .\groups.csv -Delimiter ";"
 
 foreach ($Group in $ADGroup) {

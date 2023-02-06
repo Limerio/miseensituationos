@@ -1,5 +1,5 @@
 Import-Module ActiveDirectory
-  
+
 $ADComputer = Import-Csv .\computers.csv -Delimiter ";"
 
 foreach ($Computer in $ADComputer) {
