@@ -27,18 +27,7 @@ Rename-Computer -NewName "SPC01"
 
 Import-Module ADDSDeployment
 
-Install-ADDSForest `
--CreateDnsDelegation:$false `
--DatabasePath "C:\Windows\NTDS" `
--DomainMode "WinThreshold" `
--DomainName "marvelle.local" `
--DomainNetbiosName "MARVELLE" `
--ForestMode "WinThreshold" `
--InstallDns:$true `
--LogPath "C:\Windows\NTDS" `
--NoRebootOnCompletion:$true `
--SysvolPath "C:\Windows\SYSVOL" `
--Force:$true
+Install-ADDSForest -CreateDnsDelegation:$false -DatabasePath "C:\Windows\NTDS" -DomainMode "WinThreshold" -DomainName "marvelle.local" -DomainNetbiosName "MARVELLE" -ForestMode "WinThreshold" -InstallDns:$true -LogPath "C:\Windows\NTDS" -NoRebootOnCompletion:$true -SysvolPath "C:\Windows\SYSVOL" -Force:$true
 
 #
 # Fin du dÃ©ploiement de la forÃªt
@@ -50,7 +39,7 @@ Install-ADDSForest `
 
 $action = New-ScheduledTaskAction -Execute "powershell" -Argument "-File %USERPROFILE%\\Desktop\\init.ps1"
 $trigger = New-ScheduledTaskTrigger -AtLogon
-$principal = New-ScheduledTaskPrincipal -UserId "MARVELLE\Administrateur"
+$principal = New-ScheduledTaskPrincipal -UserId "Administrateur"
 $settings = New-ScheduledTaskSettingsSet
 $task = New-ScheduledTask -Action $action -Principal $principal -Trigger $trigger -Settings $settings
 Register-ScheduledTask -InputObject $task -TaskName "Init server"
