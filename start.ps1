@@ -15,7 +15,7 @@ New-NetIPAddress -InterfaceIndex $ip.InterfaceIndex -IPAddress 192.168.0.1 -Pref
 
 Add-WindowsFeature AD-Domain-Services -IncludeManagementTools
 Install-WindowsFeature DHCP -IncludeManagementTools
-Rename-Computer -NewName "SPC01"
+Rename-Computer -NewName "SDC01"
 
 #
 # Fin de l'ajout des services de domaines
