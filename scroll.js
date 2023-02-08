@@ -13,3 +13,15 @@ const observe = new IntersectionObserver((el) => {
 const all_text_sections = document.querySelectorAll(".not-open");
 
 all_text_sections.forEach((element) => observe.observe(element));
+
+/*
+--------------------------------------------------------------------------------------------
+*/
+
+const light = document.querySelector("#light");
+const body = document.body;
+
+light.onclick = () => {
+  light.classList.toggle("active");
+  body.classList.toggle("dark");
+};

@@ -11,16 +11,17 @@
   --black-grey: #2b2b2b;
   --grey: #86868b;
   --blue: #1561f0;
-  --white: #e5e4e2;
+  --white: #e3e4fa;
 
   --not-stuck: 0.5rem 0;
   --max-width: 1120px;
   --spaceing-l: 0 1rem 0 1rem;
-  --transition: 0.3s ease-in-out all;
+  --transition: 3s ease-out;
 }
 
 body {
-  background: var(--black);
+  background: var(--white);
+  transition: var(--transition);
 }
 
 .nav-bar {
@@ -64,7 +65,7 @@ article p {
   opacity: 0;
   filter: blur(5px);
   transform: translate(-100%);
-  transition: 3s ease-out;
+  transition: var(--transition);
 }
 
 @media (prefers-reduced-motion) {
@@ -77,4 +78,35 @@ article p {
   opacity: 1;
   filter: blur(0);
   transform: translate(0);
+}
+
+#light {
+  width: 3rem;
+  height: 1.5rem;
+  background: #1561f0;
+  border-radius: 5rem;
+  transition: 0.5s;
+  cursor: pointer;
+  box-shadow: inset 0 8px 60px rgba(0, 0, 0, 0.1) inset 0 8px 60px
+    rgba(0, 0, 0, 0.1) inset 0 -4px 4px rgba(0, 0, 0, 0.1);
+}
+
+#light .in {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: linear-gradient(to bottom, var(--white), #131313);
+  border-radius: 60%;
+  transform: scale(0.9);
+  transition: 0.3s ease-in-out;
+}
+
+#light.active .in {
+  margin-left: 24px;
+  transition: 0.3s ease-in-out;
+}
+
+.dark {
+  transition: var(--transition);
+  background-color: var(--black);
 }
