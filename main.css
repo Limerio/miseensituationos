@@ -1,7 +1,9 @@
 * {
-  margin: 0 0;
+  margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   list-style: none;
   text-decoration: none;
 }
@@ -19,9 +21,22 @@
   --transition: 3s ease-out;
 }
 
+.preloader {
+  background: #101010
+    url("https://cdn.dribbble.com/users/1148781/screenshots/3233207/bold-preloader.gif")
+    no-repeat center center;
+  background-size: 50%;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 100;
+}
+
 body {
   background: var(--white);
   transition: var(--transition);
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .nav-bar {
@@ -47,6 +62,35 @@ section {
   min-height: 105vh;
 }
 
+#img {
+  background-image: url("./images/colorful_clouds_abstract_4k_hd_abstract.jpg");
+  background-size: cover;
+  padding: 250px 0;
+  background-position: bottom;
+}
+
+#img h1 {
+  font-size: 100px;
+  color: var(--white);
+}
+
+#img h3::before {
+  content: "[";
+}
+
+#img h3::after {
+  content: "]";
+}
+
+#img h3 {
+  font-size: 50px;
+  color: var(--white);
+}
+
+#img h3 span {
+  color: aqua;
+}
+
 .scroll-down {
   place-items: bottom;
 }
@@ -56,9 +100,17 @@ h2,
 h3 {
   color: var(--grey);
 }
+article {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 article p {
-  color: var(--white);
-  padding: 0 5rem 0 5rem;
+  color: var(--black);
+  max-width: 70%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .not-open {
@@ -87,15 +139,13 @@ article p {
   border-radius: 5rem;
   transition: 0.5s;
   cursor: pointer;
-  box-shadow: inset 0 8px 60px rgba(0, 0, 0, 0.1) inset 0 8px 60px
-    rgba(0, 0, 0, 0.1) inset 0 -4px 4px rgba(0, 0, 0, 0.1);
 }
 
 #light .in {
   position: absolute;
   width: 1.5rem;
   height: 1.5rem;
-  background: linear-gradient(to bottom, var(--white), #131313);
+  background: var(--grey);
   border-radius: 60%;
   transform: scale(0.9);
   transition: 0.3s ease-in-out;
@@ -109,4 +159,8 @@ article p {
 .dark {
   transition: var(--transition);
   background-color: var(--black);
+}
+
+.dark p {
+  color: var(--white);
 }
