@@ -12,9 +12,9 @@
     <header>
       <nav>
         <div class="nav-bar">
-          <a href="#">Home</a>
-          <a href="#">Documentation</a>
-          <div id="light"><i class="in"></i></div>
+          <a href="#img">Home</a>
+          <a href="#A-Propos">A propos de</a>
+          <a href="#Docs">Documentation</a>
         </div>
       </nav>
     </header>
@@ -23,30 +23,105 @@
         <h1>Bienvenue a marvel</h1>
         <h3>par: <span id="text-change"></span></h3>
       </div>
-      <img
-        src="./images/scroll-gif.gif"
-        alt="scroll-down"
-        class="scroll-down"
-        width="10%"
-      />
     </section>
-    <section>
+    <section id="A-Propos" class="no-change">
       <h2>A propos de</h2>
       <article>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni, culpa
-          deleniti voluptates cupiditate eos dolore eius. Voluptatum totam
-          nobis, iste repellat quos voluptates! Accusantium provident sequi ex
-          eligendi laudantium incidunt. Numquam tempore, inventore, illum
-          voluptas omnis necessitatibus excepturi ullam fugiat aliquid
-          consequatur vero, voluptate minima aperiam laudantium reprehenderit
-          enim nulla doloribus harum non ipsum beatae? Tempore voluptas nemo
-          minus facilis.
+          bonjour et bienvenu a marvelle, c'est sur cette site que vous
+          trouvirez le doumentation de marvelle, et comment on a cree notre
+          serveur. d'abord, on va comancer par dire que sur notre serveur tous
+          et automise, c'est-a-dire qu'il vous suffit de lancer un script et
+          tous sera mise en place, on a decide de faire ca pour aider justement
+          l'utilisateur, on a aussi cree des scripts a part, si jamais vous
+          voulez ajouter un autre utlisateur. On a aussi decider d'utilser
+          pleusieurs outils lors de creation de seveur, vous trouvrez une liste
+          des outils ci-dessous: <br />
         </p>
       </article>
+      <ul>
+        <li>Active directory: le repository de microdoft windows</li>
+        <li>Domaine Name Server: definition</li>
+        <li>DHCP: pour donner des address ip aux utlisateurs</li>
+        <li>serveur d'impression: definition</li>
+        <li>serveur de sauvegarde: si jamais on perd les informations</li>
+      </ul>
     </section>
-    <section>
+    <section id="Docs">
       <h2>Documentation</h2>
+      <div class="slide-card">
+        <div class="content">
+          <div class="card-wrapper">
+            <div class="card">
+              <div class="img-cont">
+                <span class="overlay"></span>
+                <div class="card-img">
+                  <img src="images/cpu.png" alt="" class="img-card" />
+                </div>
+              </div>
+              <!--Cpu-->
+              <div class="card-content">
+                <h2 class="name">CPU</h2>
+                <p class="discription">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Maxime commodi vitae quisquam explicabo tempora quo facilis
+                  alias blanditiis assumenda distinctio nostrum enim sint omnis
+                  velit, harum ut, illo, reprehenderit saepe.
+                </p>
+                <button class="btn">en savoir plus</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Ram-->
+        <div class="content">
+          <div class="card-wrapper">
+            <div class="card">
+              <div class="img-cont">
+                <span class="overlay"></span>
+                <div class="card-img">
+                  <img src="images/ram.png" alt="" class="img-card" />
+                </div>
+              </div>
+
+              <div class="card-content">
+                <h2 class="name">Ram</h2>
+                <p class="discription">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Maxime commodi vitae quisquam explicabo tempora quo facilis
+                  alias blanditiis assumenda distinctio nostrum enim sint omnis
+                  velit, harum ut, illo, reprehenderit saepe.
+                </p>
+                <button class="btn">en savoir plus</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--HDD-->
+        <div class="content">
+          <div class="card-wrapper">
+            <div class="card">
+              <div class="img-cont">
+                <span class="overlay"></span>
+                <div class="card-img">
+                  <img src="images/hdd.png" alt="" class="img-card" />
+                </div>
+              </div>
+
+              <div class="card-content">
+                <h2 class="name">HDD</h2>
+                <p class="discription">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Maxime commodi vitae quisquam explicabo tempora quo facilis
+                  alias blanditiis assumenda distinctio nostrum enim sint omnis
+                  velit, harum ut, illo, reprehenderit saepe.
+                </p>
+                <button class="btn">en savoir plus</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <article>
         <p>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
@@ -59,6 +134,7 @@
         </p>
       </article>
     </section>
+    <footer></footer>
     <script src="scroll.js"></script>
   </body>
 </html>

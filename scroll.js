@@ -45,10 +45,4 @@ setInterval(change, 2000);
 --------------------------------------------------------------------------------------------
 */
 
-const light = document.querySelector("#light");
-const body = document.body;
-
-light.onclick = () => {
-  light.classList.toggle("active");
-  body.classList.toggle("dark");
-};
+//paralax

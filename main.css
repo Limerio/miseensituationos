@@ -4,7 +4,6 @@
   box-sizing: border-box;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  list-style: none;
   text-decoration: none;
 }
 
@@ -33,8 +32,7 @@
 }
 
 body {
-  background: var(--white);
-  transition: var(--transition);
+  background: var(--black);
   max-width: 100%;
   overflow-x: hidden;
 }
@@ -50,7 +48,8 @@ body {
 
 .nav-bar a {
   display: block;
-  color: var(--grey);
+  color: var(--white);
+  font-weight: 900;
   font-size: 1rem;
   margin: 1rem 8rem;
 }
@@ -99,6 +98,7 @@ h1,
 h2,
 h3 {
   color: var(--grey);
+  font-size: 50px;
 }
 article {
   display: flex;
@@ -106,11 +106,25 @@ article {
   align-items: center;
 }
 article p {
-  color: var(--black);
+  color: var(--white);
   max-width: 70%;
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
+  margin: 2rem;
+  text-align: justify;
+  text-align-last: center;
+}
+
+ul {
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+}
+
+ul li {
+  margin: 0.5rem;
 }
 
 .not-open {
@@ -132,35 +146,120 @@ article p {
   transform: translate(0);
 }
 
-#light {
-  width: 3rem;
-  height: 1.5rem;
-  background: #1561f0;
-  border-radius: 5rem;
-  transition: 0.5s;
-  cursor: pointer;
+.change {
+  background-image: url("images/colorful_clouds_abstract_4k_hd_abstract.jpg");
 }
 
-#light .in {
+.slide-card {
+  max-width: 1500px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 40px 0;
+}
+
+.content {
+  margin: 0 40px;
+}
+
+.card {
+  width: 380px;
+  height: 538px;
+  border-radius: 10px;
+  background-color: white;
+  margin: 20px 20px;
+}
+
+.img-cont,
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 14px;
+}
+
+.img-cont {
+  position: relative;
+  row-gap: 5px;
+  padding: 41px 0;
+}
+
+.overlay {
   position: absolute;
-  width: 1.5rem;
-  height: 1.5rem;
-  background: var(--grey);
-  border-radius: 60%;
-  transform: scale(0.9);
-  transition: 0.3s ease-in-out;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--blue);
+  border-radius: 9px 9px 0 41px;
 }
 
-#light.active .in {
-  margin-left: 24px;
-  transition: 0.3s ease-in-out;
+.overlay::before,
+.overlay::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+  width: 40px;
+  height: 40px;
+  background: var(--blue);
 }
 
-.dark {
-  transition: var(--transition);
-  background-color: var(--black);
+.overlay::after {
+  border-radius: 0 41px 0 0;
+  background: #fff;
 }
 
-.dark p {
+.card-img {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  border-radius: 40%;
+  background: var(--white);
+  padding: 3px;
+}
+
+.card-img .img-card {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 40%;
+  border: 4px solid var(--black-grey);
+  overflow-x: hidden;
+}
+
+.name {
+  font-size: 35px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.discription {
+  font-size: 20px;
+  color: var(--black);
+  text-align: center;
+}
+
+.btn {
+  border: none;
+  font-size: 16px;
   color: var(--white);
+  padding: 8px 16px;
+  background-color: var(--blue);
+  border-radius: 6px;
+  margin: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: var(--black);
+}
+
+footer {
+  width: 100%;
+  height: 10rem;
+  background: var(--black-grey);
 }
