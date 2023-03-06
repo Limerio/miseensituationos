@@ -1,5 +1,6 @@
 $ip = Get-NetIpAddress -InterfaceAlias "Ethernet" -AddressFamily IPv4
 New-NetIPAddress -InterfaceIndex $ip.InterfaceIndex -IPAddress 192.168.0.2 -PrefixLength 24
+Rename-Computer -NewName "SDC02"
 Install-WindowsFeature UpdateServices -IncludeManagementTools
 New-Item 'C:\WSUS' -ItemType Directory 
 wsusutil postinstall CONTENT_DIR=C:\WSUS

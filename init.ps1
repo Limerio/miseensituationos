@@ -113,7 +113,7 @@ foreach ($User in $ADUsers) {
 			-Enabled $True `
 			-DisplayName "$lastname, $firstname" `
 			-Path 'OU=Utilisateurs,DC=marvelle,DC=local' `
-			-AccountPassword (ConvertTo-secureString  test@1234562  -AsPlainText -Force) -ChangePasswordAtLogon $True
+			-AccountPassword (ConvertTo-secureString  secure-password123456  -AsPlainText -Force) -ChangePasswordAtLogon $True
 
 		Add-ADGroupMember -Identity $group -Members $username
 		Write-Host "The user account $username is created and add in group $Group." -ForegroundColor Cyan
