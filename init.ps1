@@ -1,13 +1,15 @@
 #
-# Installation du réseau entendu
+# Installation du rÃ©seau entendu
 #
+
+$MAIN_PATH = "$env:USERPROFILE\Desktop"
 
 $Error.Clear()
 try {
 	Add-DhcpServerv4Scope -Name "Marvelle" -StartRange 192.168.0.1 -EndRange 192.168.0.150 -SubnetMask 255.255.255.0
 }
 catch {
-	Write-Warning "Il y a déjà une étendu"
+	Write-Warning "Il y a dÃ©jÃ  une Ã©tendu"
 }
 
 if (!$Error) {
@@ -19,16 +21,16 @@ if (!$Error) {
 }
 
 #
-# Fin de l'ajout du réseau entendu
+# Fin de l'ajout du rÃ©seau entendu
 #
 
 Import-Module ActiveDirectory
 
 # 
-# Creation des UnitÃ©s d'organisations
+# Creation des UnitÃƒÂ©s d'organisations
 #
 
-$ADOrganizationUnit = Import-Csv $env:USERPROFILE/Desktop/data/ou.csv -Delimiter ";"
+$ADOrganizationUnit = Import-Csv $MAIN_PATH\data\ou.csv -Delimiter ";"
 
 foreach ($OU in $ADOrganizationUnit) {
 	$Name = $OU.name
@@ -41,14 +43,14 @@ foreach ($OU in $ADOrganizationUnit) {
 }
 
 #
-# Fin de crÃ©ation des unitÃ©s d'organisations
+# Fin de crÃƒÂ©ation des unitÃƒÂ©s d'organisations
 #
 
 #
-# CrÃ©ation des ordindateurs
+# CrÃƒÂ©ation des ordindateurs
 #
 
-$ADComputer = Import-Csv $env:USERPROFILE/Desktop/data/computers.csv -Delimiter ";"
+$ADComputer = Import-Csv $MAIN_PATH\data\computers.csv -Delimiter ";"
 
 foreach ($Computer in $ADComputer) {
 	$Name = $Computer.name
@@ -62,14 +64,14 @@ foreach ($Computer in $ADComputer) {
 }
 
 #
-# Fin de crÃ©ation des ordinateurs
+# Fin de crÃƒÂ©ation des ordinateurs
 #
 
 #
-# CrÃ©ation des groupes
+# CrÃƒÂ©ation des groupes
 #
 
-$ADGroup = Import-Csv $env:USERPROFILE/Desktop/data/groups.csv -Delimiter ";"
+$ADGroup = Import-Csv $MAIN_PATH\data\groups.csv -Delimiter ";"
 
 foreach ($Group in $ADGroup) {
 	$Name = $Group.name
@@ -83,15 +85,15 @@ foreach ($Group in $ADGroup) {
 }
 
 #
-# Fin de crÃ©ation des groupes
+# Fin de crÃƒÂ©ation des groupes
 #
 
 #
-# CrÃ©ation des utilisateurs et attribution des groupes
+# CrÃƒÂ©ation des utilisateurs et attribution des groupes
 #
 
 
-$ADUsers = Import-Csv $env:USERPROFILE/Desktop/data/users.csv -Delimiter ";"
+$ADUsers = Import-Csv $MAIN_PATH\data\users.csv -Delimiter ";"
 $UPN = "marvelle.local"
 
 foreach ($User in $ADUsers) {
@@ -114,7 +116,7 @@ foreach ($User in $ADUsers) {
 			-Enabled $True `
 			-DisplayName "$lastname, $firstname" `
 			-Path 'OU=Utilisateurs,DC=marvelle,DC=local' `
-			-AccountPassword (ConvertTo-secureString  test@1234562  -AsPlainText -Force) -ChangePasswordAtLogon $True
+			-AccountPassword (ConvertTo-secureString  secure-password123456  -AsPlainText -Force) -ChangePasswordAtLogon $True
 
 		Add-ADGroupMember -Identity $group -Members $username
 		Write-Host "The user account $username is created and add in group $Group." -ForegroundColor Cyan
@@ -123,7 +125,7 @@ foreach ($User in $ADUsers) {
 
 
 #
-# Fin de crÃ©ation des utilisateurs et attribution des groupes
+# Fin de crÃƒÂ©ation des utilisateurs et attribution des groupes
 #
 
 #
@@ -150,7 +152,7 @@ Install-WindowsFeature Print-Internet -IncludeManagementTools
 
 
 #
-# Suppresion de la tâche
+# Suppresion de la tÃ¢che
 #
 
 Unregister-ScheduledTask -TaskName "Init server"
