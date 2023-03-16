@@ -56,10 +56,15 @@ foreach ($Group in $ADGroup) {
 	$Name = $Group.name
 	if (Get-ADGroup -Filter { Name -eq $Name }) {
 		Write-Warning "A group with name $Name already exists in Active Directory."
-	}
- else {
+	} else {
 		New-ADGroup -Name $Name -SamAccountName $Name -GroupScope Global -GroupCategory Security -Path "OU=Groupes,DC=marvelle,DC=local"
 		Write-Host "Group $Name is created"
+
+		New-Item -Name $Name -ItemType Directory -Path C:\ 
+		New-Item -Name hello.txt -ItemType file -Path C:\$Name -Value "Hello world"
+		New-SmbShare -Name shared -Path C:\$Name -ReadAccess $Name
+		Write-Host "Folder Share Group $Name is created"
+		
 	}
 }
 
@@ -111,7 +116,7 @@ foreach ($User in $ADUsers) {
 # Installation web server
 #
 
-Install-WindowsFeature Web-Server -IncludeManagementTools
+# Install-WindowsFeature Web-Server -IncludeManagementTools
 
 #
 # Fin de l'installation du web server
@@ -121,14 +126,12 @@ Install-WindowsFeature Web-Server -IncludeManagementTools
 # Inistallation Print Services
 #
 
-Install-WindowsFeature Print-Services -IncludeManagementTools
-Install-WindowsFeature Print-Internet -IncludeManagementTools
+# Install-WindowsFeature Print-Services -IncludeManagementTools
+# Install-WindowsFeature Print-Internet -IncludeManagementTools
 
 #
 # fin de l'installation du Print Server
 #
-
-
 
 #
 # Suppresion de la tÃ¢che
