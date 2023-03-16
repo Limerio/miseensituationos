@@ -36,8 +36,7 @@ foreach ($OU in $ADOrganizationUnit) {
 	$Name = $OU.name
 	if (Get-ADOrganizationalUnit -Filter { Name -eq $Name }) {
 		Write-Warning "A OU with name $Name already exists in Active Directory."
-	}
- else {
+	} else {
 		New-ADOrganizationalUnit -Name $Name -Path "DC=marvelle,DC=local"
 	}
 }
@@ -58,13 +57,21 @@ foreach ($Group in $ADGroup) {
 		Write-Warning "A group with name $Name already exists in Active Directory."
 	} else {
 		New-ADGroup -Name $Name -SamAccountName $Name -GroupScope Global -GroupCategory Security -Path "OU=Groupes,DC=marvelle,DC=local"
-		Write-Host "Group $Name is created"
-
+		Write-Host "Group $Name is created"		
+	}
+	
+	if(Get-Item -Path C:\$Name) {
+		Write-Warning "$Name folder already exist."
+	} else {
 		New-Item -Name $Name -ItemType Directory -Path C:\ 
-		New-Item -Name hello.txt -ItemType file -Path C:\$Name -Value "Hello world"
-		New-SmbShare -Name shared -Path C:\$Name -ReadAccess $Name
+		Write-Host "$Name folder create"
+	}
+
+	if(Get-SmbShare -Name $Name) {
+		Write-Warning "$Name share already exist."
+	} else {
+		New-SmbShare -Name $Name -Path C:\$Name -ReadAccess $Name
 		Write-Host "Folder Share Group $Name is created"
-		
 	}
 }
 
