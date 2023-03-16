@@ -47,27 +47,6 @@ foreach ($OU in $ADOrganizationUnit) {
 #
 
 #
-# CrÃƒÂ©ation des ordindateurs
-#
-
-$ADComputer = Import-Csv $MAIN_PATH\data\computers.csv -Delimiter ";"
-
-foreach ($Computer in $ADComputer) {
-	$Name = $Computer.name
-	if (Get-ADComputer -Filter { Name -eq $Name }) {
-		Write-Warning "A group with name $Name already exists in Active Directory."
-	}
- else {
-		New-ADComputer -Name $Name -Path "OU=Ordinateurs,DC=marvelle,DC=local"
-		Write-Host "Computer $Name is added"
-	}
-}
-
-#
-# Fin de crÃƒÂ©ation des ordinateurs
-#
-
-#
 # CrÃƒÂ©ation des groupes
 #
 
