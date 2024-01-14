@@ -1,2 +1,0 @@
-﻿Add-DnsServerPrimaryZone -Name "marvell.local" -ZoneFile "SDC01.marvelle.local" -DynamicUpdate NonsecureAndSecure
-Add-DnsServerPrimaryZone -NetworkId "192.168.0.0/24" -ZoneFile "168.192.marvelle.local" -DynamicUpdate NonsecureAndSecure
